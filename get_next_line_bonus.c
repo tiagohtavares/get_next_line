@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttavares <ttavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:08:33 by ttavares          #+#    #+#             */
-/*   Updated: 2022/11/29 11:29:03 by ttavares         ###   ########.fr       */
+/*   Created: 2022/11/29 11:13:58 by ttavares          #+#    #+#             */
+/*   Updated: 2022/11/29 11:57:13 by ttavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /* Formats stash to remove previous recovered line, keeping
 only the necessary excess after \n for next get_next_line call */
@@ -87,15 +87,15 @@ char	*read_stash(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd > FOPEN_MAX)
 		return (0);
-	stash = read_stash(fd, stash);
-	if (!stash)
+	stash[fd] = read_stash(fd, stash[fd]);
+	if (!stash[fd])
 		return (0);
-	line = format_line(stash);
-	stash = format_stash(stash);
+	line = format_line(stash[fd]);
+	stash[fd] = format_stash(stash[fd]);
 	return (line);
 }
