@@ -6,16 +6,12 @@
 /*   By: ttavares <ttavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:17:08 by ttavares          #+#    #+#             */
-/*   Updated: 2022/11/29 11:57:08 by ttavares         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:28:52 by ttavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
 
 # include <fcntl.h>
 # include <unistd.h>
